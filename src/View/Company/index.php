@@ -8,3 +8,5 @@
     <?php endforeach; ?>
   </ul>
 </div>
+
+<a href="/company/registration">登録する</a>

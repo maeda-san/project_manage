@@ -35,4 +35,14 @@ class Company extends Model
     {
         return $this->$name;
     }
+
+    public function save()
+    {
+        if (is_null($this->is_exist)) {
+            return CompanyTable::insert($this);
+        }
+        else {
+            return CompanyTable::update($this);
+        }
+    }
 }
