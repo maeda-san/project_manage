@@ -10,11 +10,24 @@ class CompanyTable
 {
     const TABLE = 'company';
 
+    /**
+     * 全件取得します
+     *
+     * @see Table::findAll
+     * @return array
+     */
     public static function findAll()
     {
         return Table::findAll(self::TABLE, 'Company');
     }
 
+    /**
+     * 顧客データを挿入します
+     *
+     * @param Company $company
+     *
+     * @return bool
+     */
     public static function insert(Company $company)
     {
         $values = [$company->name];
@@ -28,6 +41,7 @@ class CompanyTable
             $stmt->execute();
         } catch (PDOException $e) {
             echo $e->getMessage();
+
             return false;
         }
 

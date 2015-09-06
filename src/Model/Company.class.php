@@ -36,6 +36,11 @@ class Company extends Model
         return $this->$name;
     }
 
+    /**
+     * このインスタンスをデータベースに保存します
+     *
+     * @return bool 保存成功可否
+     */
     public function save()
     {
         if (is_null($this->is_exist)) {
