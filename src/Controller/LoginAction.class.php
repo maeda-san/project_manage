@@ -48,7 +48,7 @@ class LoginAction extends Controller
             $this->redirectTo('/login');
         }
 
-        $this->login();
+        $this->login($user[0]);
         $this->redirectTo('/');
     }
 

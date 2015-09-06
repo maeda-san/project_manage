@@ -138,10 +138,12 @@ class Controller
 
     /**
      * ログイン処理を行います
+     *
+     * @param User $user ログインするユーザ
      */
-    protected function login()
+    protected function login(User $user)
     {
-        $_SESSION['login'] = '1';
+        $_SESSION['login'] = $user->id;
     }
 
     /**
