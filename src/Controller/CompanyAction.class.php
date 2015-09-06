@@ -14,7 +14,6 @@ class CompanyAction extends Controller
     public function index()
     {
         $companies = CompanyTable::findAll();
-        var_dump($companies);
         $this->companies = $companies;
     }
 }
