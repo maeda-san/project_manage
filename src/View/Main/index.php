@@ -23,5 +23,16 @@
         </li>
       </ul>
     </li>
+    <li>
+      案件
+      <ul>
+        <li>
+          <a href="/project">一覧</a>
+        </li>
+        <li>
+          <a href="/project/registration">登録</a>
+        </li>
+      </ul>
+    </li>
   </ul>
 </div>
