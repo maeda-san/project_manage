@@ -30,21 +30,10 @@ class CompanyTable
      */
     public static function insert(Company $company)
     {
-        $values = [$company->name];
-        $values = implode('","', $values);
-        $values = '"' . $values . '"';
+        $data = [
+                'name'   => $company->name,
+        ];
 
-        $pdo = Table::getPdo();
-        try {
-            $sql = 'INSERT INTO `' . self::TABLE . '` (`name`) VALUES (' . $values . ')';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-
-            return false;
-        }
-
-        return true;
+        return Table::insert(self::TABLE, $data);
     }
 }

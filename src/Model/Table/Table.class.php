@@ -84,4 +84,36 @@ class Table
         return $results;
     }
 
+    /**
+     * データを挿入します
+     *
+     * @param       $table
+     * @param array $data
+     *
+     * @return bool
+     *
+     */
+    public static function insert($table, array $data)
+    {
+        $columns = array_keys($data);
+        $columns_sql = implode('`,`', $columns);
+        $columns = "`{$columns_sql}`";
+
+        $values = implode('","', $data);
+        $values = '"' . $values . '"';
+
+        $pdo = self::getPdo();
+        try {
+            $sql = "INSERT INTO `{$table}` ({$columns}) VALUES ({$values})";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+
+        return true;
+    }
+
 }

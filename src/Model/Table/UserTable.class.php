@@ -35,7 +35,7 @@ class UserTable
      */
     public static function find(array $where)
     {
-       return Table::find(self::TABLE, 'User', $where);
+        return Table::find(self::TABLE, 'User', $where);
     }
 
     /**
@@ -47,20 +47,13 @@ class UserTable
      */
     public static function insert(User $user)
     {
-        $values = [$user->name, $user->mail, $user->pass, 'active'];
-        $values = implode('","', $values);
-        $values = '"' . $values . '"';
+        $data = [
+                'name'   => $user->name,
+                'mail'   => $user->mail,
+                'pass'   => $user->pass,
+                'status' => 'active',
+        ];
 
-        $pdo = Table::getPdo();
-        try {
-            $sql = 'INSERT INTO `' . self::TABLE . '` (`name`, `mail`, `pass`, `status`) VALUES (' . $values . ')';
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return false;
-        }
-
-        return true;
+        return Table::insert(self::TABLE, $data);
     }
 }
