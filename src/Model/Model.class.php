@@ -19,31 +19,6 @@ class Model
     protected $is_exist;
 
     /**
-     * コンストラクタ
-     * プロパティの設定を行います
-     *
-     * @param array $data 設定データ
-     */
-    public function __construct(array $data)
-    {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-    }
-
-    /**
-     * プロパティの取得を許可します
-     *
-     * @param string $name プロパティ名
-     *
-     * @return mixed
-     */
-    public function __get($name)
-    {
-        return $this->$name;
-    }
-
-    /**
      * is_existプロパティの値を書き換えます。
      *
      * @param bool $value 書き換えたい値

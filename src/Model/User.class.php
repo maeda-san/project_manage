@@ -12,6 +12,27 @@
  */
 class User extends Model
 {
+    private $id;
+    private $name;
+    private $mail;
+    private $pass;
+    private $status;
+    private $created_at;
+    private $updated_at;
+
+    /**
+     * コンストラクタ
+     * プロパティの設定を行います
+     *
+     * @param array $data 設定データ
+     */
+    public function __construct(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+
     /**
      * String表現はnameプロパティを返します
      *
@@ -24,6 +45,18 @@ class User extends Model
         }
 
         return $this->name;
+    }
+
+    /**
+     * プロパティの取得を許可します
+     *
+     * @param string $name プロパティ名
+     *
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->$name;
     }
 
     /**
