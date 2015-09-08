@@ -22,6 +22,18 @@ class CompanyTable
     }
 
     /**
+     * 顧客を取得します
+     *
+     * @param array $where 検索条件 キーにカラム名、値にカラム値を入れる
+     *
+     * @return array
+     */
+    public static function find(array $where)
+    {
+        return Table::find(self::TABLE, 'Company', $where);
+    }
+
+    /**
      * 顧客データを挿入します
      *
      * @param Company $company

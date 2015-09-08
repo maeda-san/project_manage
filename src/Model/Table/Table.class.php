@@ -35,6 +35,14 @@ class Table
         return $pdo;
     }
 
+    /**
+     * 全件取得します
+     *
+     * @param string $table 対象テーブル名
+     * @param string $class 返すクラス名
+     *
+     * @return array
+     */
     public static function findAll($table, $class)
     {
         $pdo = self::getPdo();
@@ -57,6 +65,15 @@ class Table
         return $results;
     }
 
+    /**
+     * データを取得します
+     *
+     * @param string $table テーブル名
+     * @param string $class 返すクラス名
+     * @param array  $where 検索条件
+     *
+     * @return array
+     */
     public static function find($table, $class, array $where)
     {
         $where_sql = ' WHERE ';
@@ -74,7 +91,9 @@ class Table
 
             $results = [];
             while ($result = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $results[] = new $class($result);
+                $buf = new $class($result);
+                $buf->setExist(true);
+                $results[] = $buf;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

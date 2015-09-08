@@ -28,6 +28,16 @@
         </select>
       </label>
     </li>
+    <li>
+      <label>
+        顧客：
+        <select name="company" required>
+          <?php foreach ($this->companies as $company) : ?>
+              <option value="<?= $company->id ?>"><?= $company->name ?></option>
+          <?php endforeach; ?>
+        </select>
+      </label>
+    </li>
   </ul>
   <input type="submit" value="登録する">
 </form>

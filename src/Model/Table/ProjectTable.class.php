@@ -31,9 +31,10 @@ class ProjectTable
     public static function insert(Project $project)
     {
         $data = [
-                'name'   => $project->name,
-                'code'   => $project->code,
-                'status' => $project->status,
+                'name'    => $project->name,
+                'code'    => $project->code,
+                'status'  => $project->status,
+                'company' => $project->company,
         ];
 
         return Table::insert(self::TABLE, $data);

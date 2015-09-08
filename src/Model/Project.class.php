@@ -13,6 +13,7 @@ class Project extends Model
     private $name;
     private $code;
     private $status;
+    private $company;
     private $created_at;
     private $updated_at;
 
@@ -44,10 +45,6 @@ class Project extends Model
      */
     public function __get($name)
     {
-        if ($name === 'status') {
-            return $this->status_relation[$this->status];
-        }
-
         return $this->$name;
     }
 
@@ -64,5 +61,12 @@ class Project extends Model
         else {
             return ProjectTable::update($this);
         }
+    }
+
+    public function getCompanyName()
+    {
+        $company = CompanyTable::find(['id' => $this->company]);
+
+        return $company[0]->name;
     }
 }

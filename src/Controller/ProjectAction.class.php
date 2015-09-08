@@ -21,6 +21,8 @@ class ProjectAction extends Controller
             $this->error = $flush;
             $this->setSession('flush', null);
         }
+
+        $this->companies = CompanyTable::findAll();
     }
 
     /**
