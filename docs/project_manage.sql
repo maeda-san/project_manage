@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 2015 年 9 月 07 日 09:28
+-- Generation Time: 2015 年 9 月 08 日 18:16
 -- サーバのバージョン： 5.6.26
 -- PHP Version: 5.6.12
 
@@ -42,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `name` varchar(100) NOT NULL COMMENT '名前',
   `code` varchar(100) NOT NULL COMMENT 'プロジェクトコード',
   `status` varchar(100) NOT NULL COMMENT 'ステータス',
+  `company` int(11) NOT NULL COMMENT '顧客',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '作成日',
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='案件';
