@@ -29,6 +29,10 @@ class Controller
      * @var bool ログインが必要か否か
      */
     protected $need_login;
+    /**
+     * @var User 自分のユーザ情報
+     */
+    public $my_user;
 
     /**
      * コンストラクタ
@@ -57,6 +61,7 @@ class Controller
             $this->redirectTo('/login');
         }
 
+        $this->my_user = $this->getMyUser();
         $action = $this->action;
         $this->$action();
         $this->render();
@@ -166,5 +171,21 @@ class Controller
         }
 
         return false;
+    }
+
+    /**
+     * 自ユーザを返します
+     * 未ログインはnullを返します
+     *
+     * @return null|User 自ユーザインスタンス
+     */
+    private function getMyUser()
+    {
+        if (!$this->isLogin()) {
+            return null;
+        }
+        $users = UserTable::find(['id' => $_SESSION['login']]);
+
+        return $users[0];
     }
 }

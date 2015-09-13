@@ -25,9 +25,15 @@ class User extends Model
      * プロパティの設定を行います
      *
      * @param array $data 設定データ
+     * @param User  $base_user
      */
-    public function __construct(array $data)
+    public function __construct(array $data, User $base_user = null)
     {
+        if ($base_user != null) {
+            $buf = $base_user->getAll();
+            $data = array_merge($buf, $data);
+        }
+
         foreach ($data as $key => $value) {
             $this->$key = $value;
         }
@@ -68,9 +74,18 @@ class User extends Model
     {
         if (is_null($this->is_exist)) {
             return UserTable::insert($this);
-        }
-        else {
+        } else {
             return UserTable::update($this);
         }
+    }
+
+    /**
+     * プロパティを全件取得します
+     *
+     * @return array
+     */
+    public function getAll()
+    {
+        return get_object_vars($this);
     }
 }

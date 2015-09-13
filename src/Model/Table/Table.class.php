@@ -76,6 +76,7 @@ class Table
      */
     public static function find($table, $class, array $where)
     {
+        $buf = [];
         $where_sql = ' WHERE ';
         foreach ($where as $key => $value) {
             $buf[] = "`{$key}`='{$value}'";
@@ -106,11 +107,10 @@ class Table
     /**
      * データを挿入します
      *
-     * @param       $table
-     * @param array $data
+     * @param string $table 対象テーブル
+     * @param array  $data  挿入データ:w
      *
-     * @return bool
-     *
+     * @return bool 登録成功可否
      */
     public static function insert($table, array $data)
     {
@@ -124,6 +124,45 @@ class Table
         $pdo = self::getPdo();
         try {
             $sql = "INSERT INTO `{$table}` ({$columns}) VALUES ({$values})";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * データを更新します
+     *
+     * @param string $table 対象テーブル
+     * @param array  $data  更新データ
+     * @param array  $where 検索対象
+     *
+     * @return bool 更新成功可否
+     */
+    public static function update($table, array $data, array $where)
+    {
+        $buf = [];
+        foreach ($data as $column => $datum) {
+            $buf[] = "`{$column}`='{$datum}'";
+        }
+        $update_sql = implode(', ', $buf);
+        unset($buf);
+
+        $buf = [];
+        $where_sql = '';
+        foreach ($where as $key => $value) {
+            $buf[] = "`{$key}`='{$value}'";
+        }
+        $where_sql .= implode(' AND ', $buf);
+
+        $pdo = self::getPdo();
+        try {
+            $sql = "UPDATE `{$table}` SET {$update_sql} WHERE {$where_sql}";
             $stmt = $pdo->prepare($sql);
             $stmt->execute();
         } catch (PDOException $e) {

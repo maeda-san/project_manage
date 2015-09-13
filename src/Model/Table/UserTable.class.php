@@ -56,4 +56,24 @@ class UserTable
 
         return Table::insert(self::TABLE, $data);
     }
+
+    /**
+     * ユーザを更新します
+     *
+     * @param User $user 更新ユーザ
+     *
+     * @return bool 更新成功可否
+     */
+    public static function update(User $user)
+    {
+        $data = [
+                'name'   => $user->name,
+                'mail'   => $user->mail,
+                'pass'   => $user->pass,
+                'status' => 'active',
+        ];
+        $where = ['id' => $user->id];
+
+        return Table::update(self::TABLE, $data, $where);
+    }
 }

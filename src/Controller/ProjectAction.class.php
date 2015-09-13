@@ -8,12 +8,20 @@
  */
 class ProjectAction extends Controller
 {
+    /**
+     * indexアクション
+     * 案件を全件表示します
+     */
     public function index()
     {
         $projects = ProjectTable::findAll();
         $this->projects = $projects;
     }
 
+    /**
+     * registrationアクション
+     * 登録フォームを表示します
+     */
     public function registration()
     {
         $flush = $this->getSession('flush');
